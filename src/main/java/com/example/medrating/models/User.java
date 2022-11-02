@@ -1,6 +1,8 @@
 package com.example.medrating.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -8,8 +10,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
+    @NotBlank(message = "Поле не должно быть пустым")
+    @Size(min = 5, message = "Имя пользователя должено быть больше 5 символов")
     private String username;
+    @NotBlank(message = "Поле не должно быть пустым")
+    @Size(min = 8, message = "Пароль должен быть больше 8 символов")
     private String password;
     private Boolean active;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -17,7 +22,18 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    @OneToOne(optional = true, mappedBy = "user")
+    private Accaunt accaunt;
+
     public User() {
+    }
+
+    public Accaunt getAccaunt() {
+        return accaunt;
+    }
+
+    public void setAccaunt(Accaunt accaunt) {
+        this.accaunt = accaunt;
     }
 
     public Set<Role> getRoles() {
