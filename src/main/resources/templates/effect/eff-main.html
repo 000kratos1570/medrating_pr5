@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="/MyIconP.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/MyIconP.ico" rel="icon" type="image/ico" />
+    <title>AdminConfig</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/static/bootstrap.min.css" th:href="@{/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/static/styles.css" th:href="@{/styles.css}">
+    <style>
+        .nav {
+            background: #e6b333;
+            border: none;
+            color: white;
+            text-align: center;
+            font-size: 0.8em;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: cursive;
+            padding-left: 15px;
+            padding-right: 15px;
+            height: 40px;
+            margin-left: 50px;
+            margin-top: 5px;
+            border-radius: 9px;
+        }
+        .myprofile {
+            margin: 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: 10px 15px 15px 15px;
+            border-radius: 20px;
+
+            display:flex;
+            flex-direction:column;
+        }
+        .mycontent {
+            padding-bottom: 30px;
+            padding-top: 30px;
+        }
+        #wrap{
+            min-height:100%;
+        }
+        .ErrorMassage {
+            color: #1E8F78; /*#197664 #1E8F78*/
+        }
+
+        a {
+            color: #FF7F50;
+        }
+
+        input[type="text"] {
+            background: transparent;
+            border: 2px solid #22272d;
+            padding-left: 10px;
+            color: #e6b333;
+        }
+
+        input[type="password"] {
+            background: transparent;
+            border: 2px solid #22272d;
+            padding-left: 10px;
+            color: #e6b333;
+        }
+
+        input[type="date"], input[type="email"], input[type="file"] {
+            background: transparent;
+            border: 2px solid #22272d;
+            padding-left: 10px;
+            color: #e6b333;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        hr {
+            background: white;
+        }
+
+        .value {
+            color: #6C757D;
+            font-size: 17px;
+        }
+        .container {
+            width: 30%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        select {
+            background: transparent;
+            border: 2px solid #22272d;
+            padding-left: 10px;
+            color: #e6b333;
+        }
+
+        option {
+            background-color: black;
+        }
+
+        .name {
+            color: #FF7F50;
+            font-size: 18px;
+        }
+
+        .value {
+            color: #6C757D;
+            font-size: 17px;
+        }
+    </style>
+</head>
+<body class="mybody">
+<div id="wrap">
+    <header th:insert="fragments/header :: myheader2"/>
+    <div class="mycontent">
+        <main role="main" class="pb-3">
+            <div class="text-center">
+                <div class="container">
+                    <h1>Все свойства</h1>
+                    <a href="/effect/add">Добавить свойство</a>w
+                </div>
+                <div style="width: 65%; margin:auto; margin-top: 40px; text-align: center;">
+                    <form>
+                        <div style="padding: 20px;" th:each="el : ${effect}">
+                            <div class="myprofile" style="margin:20px 0px 20px 0px">
+                                <div>
+                                    <p class="name">Описание: <span class="value" th:text="${el.opisanie}"/></p>
+                                </div>
+                            </div>
+                            <form th:action="'/effect/' + ${el.id} + '/del'" method="post">
+                                <input type="submit" value="Удалить свойство"/>
+                            </form>
+                            <a th:href="'/effect/' + ${el.id}">Посмотреть подробности</a>
+                            <b style="border-left: 2px inset #ff6a00; padding-left: 10px; margin-left: 8px;"></b>
+                            <a th:href="'/effect/' + ${el.id} + '/update'">Изменить свойство</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>>
+</body>
+</html>

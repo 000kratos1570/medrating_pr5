@@ -62,9 +62,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link href="/MyIconP.ico" rel="shortcut icon" type="image/x-icon" />
-  <link href="/MyIconP.ico" rel="icon" type="image/ico" />
-  <title>Registration</title>
+    <link href="/MyIconP.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/MyIconP.ico" rel="icon" type="image/ico" />
+  <title>AdminConfig</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="../static/bootstrap.min.css" th:href="@{/bootstrap.min.css}"/>
   <link rel="stylesheet" href="../static/styles.css" th:href="@{/styles.css}">
@@ -172,38 +172,37 @@
 </head>
 <body class="mybody">
 <div id="wrap">
-  <header th:insert="fragments/header :: myheader"/>
+  <header th:insert="fragments/header :: myheader2"/>
   <div class="mycontent">
     <main role="main" class="pb-3">
       <div class="text-center">
-        <h1>Registration</h1>
-        <div class="container">
-          <div th:if="${error}">
-            <p th:text="${error}"></p>
-          </div>
-          <form id="creatuser" th:action="@{/registration}" method="post">
+        <h1>Изменить</h1>
+        <div class="container" th:each="el:${acc}" >
+          <form id="creatuser" th:object="${acc}" method="post">
+            <p th:text="${acc.getUser().getId()}"></p>
             <div class="form-group">
-              <input type="text" name="username" autocomplete="off" placeholder="Login" />
+              <input type="text" th:field="*{familia}" name="familia" placeholder="Фамилия" />
             </div>
+            <div style="color: red " th:if="${#fields.hasErrors('familia')}" th:errors="*{familia}"></div>
             <div class="form-group">
-              <input type="password" name="password" placeholder="Password" />
+              <input type="text" th:field="*{ima}" name="ima" placeholder="Имя" />
             </div>
+            <div style="color: red " th:if="${#fields.hasErrors('ima')}" th:errors="*{ima}"></div>
             <div class="form-group">
-              <input type="text" name="familia" placeholder="Фамилия" />
+              <input type="text" th:field="*{otchestvo}" name="otchestvo" placeholder="Отчество" />
             </div>
+            <div style="color: red " th:if="${#fields.hasErrors('otchestvo')}" th:errors="*{otchestvo}"></div>
             <div class="form-group">
-              <input type="text" name="ima" placeholder="Имя" />
+              <input type="text" th:field="*{status}" name="status" placeholder="Статус" />
             </div>
+            <div style="color: red " th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
             <div class="form-group">
-              <input type="text" name="otchestvo" placeholder="Отчество" />
-            </div>
-            <div class="form-group">
-              <input type="submit" value="Register" />
+              <input type="submit" value="Изменить" />
             </div>
           </form>
         </div>
         <div>
-          <a href="/login">Back to Sign in</a>
+          <a href="/home">Back to home</a>
         </div>
       </div>
     </main>
